@@ -57,7 +57,7 @@ export default {
   },
   computed:{
     has_next_page(){
-      let total = Math.ceil(this.total_count/2);
+      let total = Math.ceil(this.total_count/this.size);
       return this.page<total;
     },
     change(){
