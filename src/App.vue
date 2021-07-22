@@ -2,6 +2,7 @@
   <div id="nav">
     <router-link :to="{name:'EventList'}">Home</router-link> |
     <router-link :to="{name:'About'}">About</router-link>
+    hello
   </div>
 
   <!-- new element -->
