@@ -1,6 +1,10 @@
 <template>
   <h1>Events For Good</h1>
   <div class="events">
+     <form @submit="change_size">
+    <input id="select-size"  v-model="size" type="number">
+    </form>
+    <br>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <div class="pagination">
     <router-link :to="{name:'EventList',query:{page:page-1}}"
@@ -35,12 +39,13 @@ export default {
   data() {
     return {
       events: null,
-      total_count:0
+      total_count:0,
+      size:2
     }
   },
   created(){
     watchEffect(()=>{
-      EventService.getEvents(2,this.page)
+      EventService.getEvents(this.size,this.page)
         .then((response)=>{
             this.events = response.data;
             this.total_count=response.headers['x-total-count']
@@ -54,6 +59,10 @@ export default {
     has_next_page(){
       let total = Math.ceil(this.total_count/2);
       return this.page<total;
+    },
+    change(){
+      console.log(this.size)
+      return true
     }
   }
 }
